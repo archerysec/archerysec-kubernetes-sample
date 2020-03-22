@@ -14,7 +14,7 @@ spec:
     metadata:
       name: archerysec-postgres
       labels:
-        name: archerysec-postgres-app
+        name: archerysec-postgres
         app: archerysec-app
     spec:
       containers:
