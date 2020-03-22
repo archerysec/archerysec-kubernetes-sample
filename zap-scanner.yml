@@ -5,7 +5,7 @@ metadata:
   labels:
     app: archerysec-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       name: zap-application
