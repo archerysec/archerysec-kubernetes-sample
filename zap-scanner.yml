@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zap-deployment
+  labels:
+    app: archerysec-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: zap-application
+      app: zap-app
+  template:
+    metadata:
+      name: zap-application
+      labels:
+        name: zap-application
+        app: zap-app
+    spec:
+      containers:
+        - name: zaproxy
+          image: owasp/zap2docker-stable
+          command: ["zap.sh"]
+          args: ["-daemon", "-host", "0.0.0.0", "-port", "8090", "-config", "api.disablekey=true", "-config", "api.addrs.addr.name=.*", "-config", "api.addrs.addr.regex=true"]
+          ports:
+            - containerPort: 8090
