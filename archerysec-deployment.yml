@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archerysec-deployment
+  labels:
+    app: archerysec-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: archerysec-application
+      app: archerysec-app
+  template:
+    metadata:
+      name: archerysec-application
+      labels:
+        name: archerysec-application
+        app: archerysec-app
+    spec:
+      containers:
+        - name: archerysec
+          image: archerysec/archerysec
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DB_PASSWORD
+              value: "archerysec"
+            - name: DB_USER
+              value: "archerysec"
+            - name: DB_HOST
+              value: "db"
+            - name: DJANGO_SETTINGS_MODULE
+              value: "archerysecurity.settings.development"
+            - name: DJANGO_SECRET_KEY
+              value: "38ry394y8r9wy89y9ny89x84y98737847834ujhd"
+            - name: DJANGO_DEBUG
+              value: "1"

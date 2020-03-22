@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: archerysec-app
+  labels:
+    name: archerysec-application
+    app: archerysec-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8000
+  selector:
+    name: archerysec-application
+    app: archerysec-app

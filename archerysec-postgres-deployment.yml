@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archerysec-postgres-deployment
+  labels:
+    app: archerysec-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: archerysec-postgres
+      app: archerysec-app
+  template:
+    metadata:
+      name: archerysec-postgres
+      labels:
+        name: archerysec-postgres-app
+        app: archerysec-app
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.1-alpine
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: "archerysec"
+            - name: POSTGRES_PASSWORD
+              value: "archerysec"
+            - name: POSTGRES_USER
+              value: "archerysec"
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: "trust"
