@@ -5,7 +5,7 @@ metadata:
   labels:
     app: archerysec-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: openvas-application
@@ -20,5 +20,10 @@ spec:
       containers:
         - name: openvas
           image: avhost/docker-openvas
+          resources:
+            requests:
+              memory: "500Mi"
+            limits:
+              memory: "1000Mi"
           ports:
             - containerPort: 9390
