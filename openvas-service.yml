@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openvas
+  labels:
+    name: openvas-service
+    app: openvas-app
+spec:
+  ports:
+    - port: 9390
+      targetPort: 9390
+  selector:
+    name: openvas-application
+    app: openvas-app

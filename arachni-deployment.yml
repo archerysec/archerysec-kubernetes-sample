@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arachni-deployment
+  labels:
+    app: archerysec-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: arachni-application
+      app: arachni-app
+  template:
+    metadata:
+      name: arachni-application
+      labels:
+        name: arachni-application
+        app: arachni-app
+    spec:
+      containers:
+        - name: arachni
+          image: ahannigan/docker-arachni
+          command: ["bin/arachni_rest_server"]
+          args: ["--address", "0.0.0.0"]
+          ports:
+            - containerPort: 7331

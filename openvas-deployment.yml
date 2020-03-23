@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openvas-deployment
+  labels:
+    app: archerysec-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: openvas-application
+      app: openvas-app
+  template:
+    metadata:
+      name: openvas-application
+      labels:
+        name: openvas-application
+        app: openvas-app
+    spec:
+      containers:
+        - name: openvas
+          image: avhost/docker-openvas
+          ports:
+            - containerPort: 9390
